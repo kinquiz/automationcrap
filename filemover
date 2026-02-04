@@ -10,7 +10,7 @@ for dirpath, dirnames, filenames in os.walk(dir):
       if filename.endswith(ftype):
          print(filename)
 
-moving = input("Do you want to move all those files to a one folder? (yes/no): ")
+moving = input("Do you want to move all those files to a one folder? (yes/no/delete): ")
 if moving.lower() == "yes":
    target_dir = input("Enter the target directory to move files: ")
    try:
@@ -21,6 +21,11 @@ if moving.lower() == "yes":
       for filename in filenames:
          if filename.endswith(ftype):
             shutil.move(os.path.join(dirpath, filename), os.path.join(target_dir, filename))
+elif moving.lower() == "delete":
+   for dirpath, dirnames, filenames in os.walk(dir):
+      for filename in filenames:
+         if filename.endswith(ftype):
+            os.remove(os.path.join(dirpath, filename))
 else:
    exit()
 print("Files successfully moved to " + target_dir)
