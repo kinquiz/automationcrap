@@ -13,6 +13,10 @@ for dirpath, dirnames, filenames in os.walk(dir):
 moving = input("Do you want to move all those files to a one folder? (yes/no): ")
 if moving.lower() == "yes":
    target_dir = input("Enter the target directory to move files: ")
+   try:
+      os.mkdir(target_dir)
+   except FileExistsError:
+      pass
    for dirpath, dirnames, filenames in os.walk(dir):
       for filename in filenames:
          if filename.endswith(ftype):
