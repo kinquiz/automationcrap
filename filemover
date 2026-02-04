@@ -1,0 +1,23 @@
+import os
+import shutil
+
+ftype = input("Enter the file type to list: ")
+dir = input("Enter the directory to list files: ")
+
+print(f"Listing {ftype} files:")
+for dirpath, dirnames, filenames in os.walk(dir):
+   for filename in filenames:
+      if filename.endswith(ftype):
+         print(filename)
+
+moving = input("Do you want to move all those files to a one folder? (yes/no): ")
+if moving.lower() == "yes":
+   target_dir = input("Enter the target directory to move files: ")
+   for dirpath, dirnames, filenames in os.walk(dir):
+      for filename in filenames:
+         if filename.endswith(ftype):
+            shutil.move(os.path.join(dirpath, filename), os.path.join(target_dir, filename))
+else:
+   exit()
+print("Files successfully moved to " + target_dir)
+exit()
